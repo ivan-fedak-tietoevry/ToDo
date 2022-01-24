@@ -1,5 +1,6 @@
 package com.fedak.application.integration_tests;
 
+import com.fedak.application.Application;
 import com.fedak.application.entity.ToDo;
 import com.fedak.application.entity.User;
 import com.fedak.application.integration_tests.rest_client.RestClient;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import java.util.List;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 class IntegrationTest {
 
 	@LocalServerPort
@@ -62,5 +65,12 @@ class IntegrationTest {
 	void getUserById(){
 		User user = restClient.getUserById();
 		assert(user != null);
+	}
+
+	@Order(6)
+	@Test
+	void getAllUsers(){
+		List<User> users = restClient.getAllUsers();
+		assert(users.size() != 0);
 	}
 }

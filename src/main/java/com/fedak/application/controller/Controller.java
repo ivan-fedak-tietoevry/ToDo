@@ -66,7 +66,7 @@ public class Controller {
         return user;
     }
 
-    @GetMapping("/users/{id}/")
+    @GetMapping("/users/{id}")
     public User getUser(@PathVariable int id){
         User user = userService.getUser(id);
         if (user==null) {
